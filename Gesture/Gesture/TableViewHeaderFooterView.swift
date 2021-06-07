@@ -1,5 +1,5 @@
 //
-//  GestureView.swift
+//  TableViewHeaderFooterView.swift
 //  Gesture
 //
 //  Created by deng on 2021/6/7.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class GestureView: UIView {
-    init() {
-        super.init(frame: .zero)
+class TableViewHeaderFooterView: UITableViewHeaderFooterView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         let tap = TapGestureRecognizer(target: self, action: #selector(singleTapGesture))
         tap.name = "\(Self.self) tapGestureRecognizer"
         tap.delegate = self
@@ -21,11 +21,9 @@ class GestureView: UIView {
     }
 }
 
-// MARK: -
-
-extension GestureView: UIGestureRecognizerDelegate {
+extension TableViewHeaderFooterView: UIGestureRecognizerDelegate {
     @objc func singleTapGesture() {
-        self.backgroundColor = .random.withAlphaComponent(0.5)
+        self.backgroundConfiguration?.backgroundColor = .random.withAlphaComponent(0.5)
     }
 
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -39,15 +37,14 @@ extension GestureView: UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        print("\(Self.self) : gestureRecognizer (\(gestureRecognizer.name!)) (\(otherGestureRecognizer.name!))")
+        print("\(Self.self) : gestureRecognizer (\(gestureRecognizer.name!)) (\(otherGestureRecognizer.name ?? "no name"))")
         return true
     }
-
 }
 
 // MARK: -
 
-extension GestureView {
+extension TableViewHeaderFooterView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         print("\(Self.self) : in hit test")
         let view = super.hitTest(point, with: event)

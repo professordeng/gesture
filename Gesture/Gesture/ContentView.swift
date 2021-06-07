@@ -19,7 +19,7 @@ class ContentView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "Header")
+        tableView.register(TableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "Header")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate ([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -64,6 +64,11 @@ extension ContentView: UITableViewDelegate, UITableViewDataSource {
         44
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print(indexPath)
+    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         32
     }
@@ -75,41 +80,42 @@ extension ContentView: UITableViewDelegate, UITableViewDataSource {
         view.backgroundConfiguration = config
         return view
     }
+    
 }
 
 // MARK: -
 
 extension ContentView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        print("hit test : in \(self)")
+        print("\(Self.self) : in hit test")
         let view = super.hitTest(point, with: event)
-        print("hit test : out \(self)")
+        print("\(Self.self) : out hit test")
         return view
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let isInside = super.point(inside: point, with: event)
-        print("point inside (\(isInside)) : \(self)")
+        print("\(Self.self) : point inside (\(isInside))")
         return isInside
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch begin : \(self)")
+        print("\(Self.self) : touch begin")
         super.touchesBegan(touches, with: event)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch moved : \(self)")
+        print("\(Self.self) : touch moved")
         super.touchesMoved(touches, with: event)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch ended : \(self)")
+        print("\(Self.self) : touch ended")
         super.touchesEnded(touches, with: event)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch canceled : \(self)")
+        print("\(Self.self) : touch canceled")
         super.touchesCancelled(touches, with: event)
     }
 }
