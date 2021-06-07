@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    let gestureView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,16 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "Header")
+
+        view.addSubview(gestureView)
+        gestureView.translatesAutoresizingMaskIntoConstraints = false
+        gestureView.backgroundColor = .blue.withAlphaComponent(0.5)
+        NSLayoutConstraint.activate([
+            gestureView.topAnchor.constraint(equalTo: view.topAnchor),
+            gestureView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gestureView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            gestureView.widthAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }
 
