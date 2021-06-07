@@ -14,6 +14,7 @@
 		04DB6E74266DC681001ADFC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DB6E73266DC681001ADFC2 /* Assets.xcassets */; };
 		04DB6E77266DC681001ADFC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DB6E75266DC681001ADFC2 /* LaunchScreen.storyboard */; };
 		04DB6E7F266DF279001ADFC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB6E7E266DF279001ADFC2 /* ContentView.swift */; };
+		04DB6E81266DF5EB001ADFC2 /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB6E80266DF5EB001ADFC2 /* GestureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		04DB6E76266DC681001ADFC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DB6E78266DC681001ADFC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04DB6E7E266DF279001ADFC2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		04DB6E80266DF5EB001ADFC2 /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				04DB6E6C266DC67E001ADFC2 /* SceneDelegate.swift */,
 				04DB6E6E266DC67E001ADFC2 /* ViewController.swift */,
 				04DB6E7E266DF279001ADFC2 /* ContentView.swift */,
+				04DB6E80266DF5EB001ADFC2 /* GestureView.swift */,
 				04DB6E70266DC67E001ADFC2 /* Main.storyboard */,
 				04DB6E73266DC681001ADFC2 /* Assets.xcassets */,
 				04DB6E75266DC681001ADFC2 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				04DB6E6B266DC67E001ADFC2 /* AppDelegate.swift in Sources */,
 				04DB6E7F266DF279001ADFC2 /* ContentView.swift in Sources */,
 				04DB6E6D266DC67E001ADFC2 /* SceneDelegate.swift in Sources */,
+				04DB6E81266DF5EB001ADFC2 /* GestureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
