@@ -8,11 +8,13 @@
 import UIKit
 
 class GestureView: UIView {
+    lazy var tap: TapGestureRecognizer = {
+        TapGestureRecognizer(target: self, action: #selector(singleTapGesture))
+    }()
+    
     init() {
         super.init(frame: .zero)
-        let tap = TapGestureRecognizer(target: self, action: #selector(singleTapGesture))
         tap.name = "\(Self.self) tapGestureRecognizer"
-        tap.delegate = self
         self.addGestureRecognizer(tap)
     }
 
@@ -23,7 +25,7 @@ class GestureView: UIView {
 
 // MARK: -
 
-extension GestureView: UIGestureRecognizerDelegate {
+extension GestureView {
     @objc func singleTapGesture() {
         self.backgroundColor = .random.withAlphaComponent(0.5)
     }
@@ -32,17 +34,6 @@ extension GestureView: UIGestureRecognizerDelegate {
         print("\(Self.self) : gestureRecognizer should begin (\(gestureRecognizer.name!))")
         return true
     }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        print("\(Self.self) : gestureRecognizer should receive touch (\(gestureRecognizer.name!))")
-        return true
-    }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        print("\(Self.self) : gestureRecognizer (\(gestureRecognizer.name!)) (\(otherGestureRecognizer.name!))")
-        return true
-    }
-
 }
 
 // MARK: -

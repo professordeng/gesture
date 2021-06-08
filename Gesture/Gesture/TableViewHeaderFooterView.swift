@@ -8,11 +8,17 @@
 import UIKit
 
 class TableViewHeaderFooterView: UITableViewHeaderFooterView {
+    lazy var tap: TapGestureRecognizer = {
+        TapGestureRecognizer(target: self, action: #selector(singleTapGesture))
+    }()
+
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        let tap = TapGestureRecognizer(target: self, action: #selector(singleTapGesture))
+        var config = UIBackgroundConfiguration.listPlainHeaderFooter()
+        config.backgroundColor = .red.withAlphaComponent(0.5)
+        self.backgroundConfiguration = config
+
         tap.name = "\(Self.self) tapGestureRecognizer"
-        tap.delegate = self
         self.addGestureRecognizer(tap)
     }
 
@@ -21,23 +27,13 @@ class TableViewHeaderFooterView: UITableViewHeaderFooterView {
     }
 }
 
-extension TableViewHeaderFooterView: UIGestureRecognizerDelegate {
+extension TableViewHeaderFooterView {
     @objc func singleTapGesture() {
         self.backgroundConfiguration?.backgroundColor = .random.withAlphaComponent(0.5)
     }
 
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         print("\(Self.self) : gestureRecognizer should begin (\(gestureRecognizer.name!))")
-        return true
-    }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        print("\(Self.self) : gestureRecognizer should receive touch (\(gestureRecognizer.name!))")
-        return true
-    }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        print("\(Self.self) : gestureRecognizer (\(gestureRecognizer.name!)) (\(otherGestureRecognizer.name ?? "no name"))")
         return true
     }
 }

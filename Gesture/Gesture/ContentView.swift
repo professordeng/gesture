@@ -13,6 +13,15 @@ class ContentView: UIView {
 
     init() {
         super.init(frame: .zero)
+        makeUI()
+        gestureView.tap.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func makeUI() {
         addSubview(tableView)
         addSubview(gestureView)
 
@@ -36,10 +45,6 @@ class ContentView: UIView {
             gestureView.bottomAnchor.constraint(equalTo: bottomAnchor),
             gestureView.widthAnchor.constraint(equalToConstant: 40)
         ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -66,7 +71,6 @@ extension ContentView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -75,12 +79,9 @@ extension ContentView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Header")!
-        var config = UIBackgroundConfiguration.listPlainHeaderFooter()
-        config.backgroundColor = .red.withAlphaComponent(0.5)
-        view.backgroundConfiguration = config
+        (view as? TableViewHeaderFooterView)?.tap.delegate = self
         return view
     }
-    
 }
 
 // MARK: -
@@ -88,6 +89,9 @@ extension ContentView: UITableViewDelegate, UITableViewDataSource {
 extension ContentView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         print("\(Self.self) : in hit test")
+        if let view = tableView.sectionAtLocation(self.convert(point, to: tableView)) {
+            return view
+        }
         let view = super.hitTest(point, with: event)
         print("\(Self.self) : out hit test")
         return view
@@ -117,5 +121,19 @@ extension ContentView {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("\(Self.self) : touch canceled")
         super.touchesCancelled(touches, with: event)
+    }
+}
+
+// MARK: -
+
+extension ContentView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        print("\(Self.self) : gestureRecognizer should receive touch (\(gestureRecognizer.name!))")
+        return true
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        print("\(Self.self) : gestureRecognizer (\(gestureRecognizer.name!)) (\(otherGestureRecognizer.name ?? "no name"))")
+        return true
     }
 }
